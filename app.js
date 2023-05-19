@@ -7,6 +7,8 @@ import { PORT } from "./src/config.js";
 
 import MachineRoutes from "./routes/machine.route.js";
 import PartRoutes from "./routes/part.route.js";
+import SubPartRoutes from "./routes/subpart.route.js";
+import QuialityRoutes from "./routes/quality.route.js";
 
 const app = express();
 const port = PORT;
@@ -23,6 +25,8 @@ app.get("/", (req, res) => {
 
 app.use("/machine/", MachineRoutes);
 app.use("/part/", PartRoutes);
+app.use("/subpart/", SubPartRoutes);
+app.use("/quality/", QuialityRoutes);
 
 //Ruta de error 404
 app.use((req, res) => {
