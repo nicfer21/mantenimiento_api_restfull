@@ -20,6 +20,11 @@ import SupplierRoutes from "./routes/supplier.route.js";
 import TypeElementRoutes from "./routes/typeelement.route.js";
 import UnitElementRoutes from "./routes/unitelement.route.js";
 
+import WorkerRoutes from "./routes/worker.route.js";
+import ClientRoutes from "./routes/client.route.js";
+import SessionClientRoutes from "./routes/sessionclient.route.js";
+import MaintenanceRequestRoutes from "./routes/maintenancerequest.route.js";
+
 const app = express();
 const port = PORT;
 app.use(cors());
@@ -47,6 +52,10 @@ app.use("/priority/", PriorityRoutes);
 app.use("/supplier/", SupplierRoutes);
 app.use("/typeelement/", TypeElementRoutes);
 app.use("/unitelement/", UnitElementRoutes);
+app.use("/worker/", WorkerRoutes);
+app.use("/client/", ClientRoutes);
+app.use("/sessionclient/", SessionClientRoutes);
+app.use("/maintenancerequest/", MaintenanceRequestRoutes);
 
 //Ruta de error 404
 app.use((req, res) => {
