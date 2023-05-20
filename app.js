@@ -9,6 +9,11 @@ import MachineRoutes from "./routes/machine.route.js";
 import PartRoutes from "./routes/part.route.js";
 import SubPartRoutes from "./routes/subpart.route.js";
 import QuialityRoutes from "./routes/quality.route.js";
+import WorkTypeRoutes from "./routes/worktype.route.js";
+
+import PlaceRoutes from "./routes/place.route.js";
+import ProfesionRoutes from "./routes/profesion.route.js";
+import StrategyRoutes from "./routes/strategy.route.js";
 
 const app = express();
 const port = PORT;
@@ -27,6 +32,10 @@ app.use("/machine/", MachineRoutes);
 app.use("/part/", PartRoutes);
 app.use("/subpart/", SubPartRoutes);
 app.use("/quality/", QuialityRoutes);
+app.use("/worktype/", WorkTypeRoutes);
+app.use("/place/", PlaceRoutes);
+app.use("/profesion/", ProfesionRoutes);
+app.use("/strategy/", StrategyRoutes);
 
 //Ruta de error 404
 app.use((req, res) => {
