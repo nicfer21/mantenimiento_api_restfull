@@ -8,6 +8,7 @@ const ClientModel = db.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
+      autoIncrement:true,
     },
     image: {
       type: DataTypes.STRING,

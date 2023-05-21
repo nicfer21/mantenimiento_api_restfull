@@ -8,6 +8,7 @@ const MaintenanceReportModel = db.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
+      autoIncrement:true,
     },
     startReport: {
       type: DataTypes.DATE,

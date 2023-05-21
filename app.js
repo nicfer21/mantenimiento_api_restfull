@@ -62,7 +62,6 @@ app.use("/worker/", WorkerRoutes);
 app.use("/client/", ClientRoutes);
 app.use("/sessionclient/", SessionClientRoutes);
 app.use("/maintenancerequest/", MaintenanceRequestRoutes);
-
 app.use("/inventory/", InventoryRoutes);
 app.use("/maintenanceorder/", MaintenanceOrderRoutes);
 app.use("/maintenanceprocedure/", MaintenanceProcedureRoutes);

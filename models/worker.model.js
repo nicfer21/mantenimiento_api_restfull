@@ -8,6 +8,7 @@ const WorkerModel = db.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
+      autoIncrement:true,
     },
     dni: {
       type: DataTypes.STRING,

@@ -8,6 +8,7 @@ const SessionClientModel = db.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
+      autoIncrement:true,
     },
     datesession: {
       type: DataTypes.DATE,

@@ -8,6 +8,7 @@ const PurchaseModel = db.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
+      autoIncrement:true,
     },
     purchaseDate: {
       type: DataTypes.DATE,

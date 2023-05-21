@@ -42,3 +42,50 @@ export const getByParent = async (req, res) => {
     });
   }
 };
+
+export const createSessionClient = async (req, res) => {
+  try {
+    await SessionClientModel.create(req.body);
+    res.json({
+      messege: 1,
+    });
+  } catch (error) {
+    res.json({
+      error: error,
+    });
+  }
+};
+
+export const updateSessionClient = async (req, res) => {
+  try {
+    await SessionClientModel.update(req.body, {
+      where: {
+        idSessionClient: req.params.id,
+      },
+    });
+    res.json({
+      messege: 1,
+    });
+  } catch (error) {
+    res.json({
+      error: error,
+    });
+  }
+};
+
+export const deleteSessionClient = async (req, res) => {
+  try {
+    await SessionClientModel.destroy({
+      where: {
+        idSessionClient: req.params.id,
+      },
+    });
+    res.json({
+      messege: 1,
+    });
+  } catch (error) {
+    res.json({
+      error: error,
+    });
+  }
+};
