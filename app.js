@@ -19,11 +19,17 @@ import PriorityRoutes from "./routes/priority.route.js";
 import SupplierRoutes from "./routes/supplier.route.js";
 import TypeElementRoutes from "./routes/typeelement.route.js";
 import UnitElementRoutes from "./routes/unitelement.route.js";
-
 import WorkerRoutes from "./routes/worker.route.js";
 import ClientRoutes from "./routes/client.route.js";
 import SessionClientRoutes from "./routes/sessionclient.route.js";
 import MaintenanceRequestRoutes from "./routes/maintenancerequest.route.js";
+import InventoryRoutes from "./routes/inventory.route.js";
+import MaintenanceOrderRoutes from "./routes/maintenanceorder.route.js";
+import MaintenanceProcedureRoutes from "./routes/maintenanceprocedure.route.js";
+import MaintenanceReportRoutes from "./routes/maintenancereport.route.js";
+import PurchaseRoutes from "./routes/purchase.route.js";
+import RequirementsRoutes from "./routes/requirements.route.js";
+import UsedInventoryRoutes from "./routes/usedinventory.route.js";
 
 const app = express();
 const port = PORT;
@@ -56,6 +62,14 @@ app.use("/worker/", WorkerRoutes);
 app.use("/client/", ClientRoutes);
 app.use("/sessionclient/", SessionClientRoutes);
 app.use("/maintenancerequest/", MaintenanceRequestRoutes);
+
+app.use("/inventory/", InventoryRoutes);
+app.use("/maintenanceorder/", MaintenanceOrderRoutes);
+app.use("/maintenanceprocedure/", MaintenanceProcedureRoutes);
+app.use("/maintenancereport/", MaintenanceReportRoutes);
+app.use("/purchase/", PurchaseRoutes);
+app.use("/requirements/", RequirementsRoutes);
+app.use("/usedinventory/", UsedInventoryRoutes);
 
 //Ruta de error 404
 app.use((req, res) => {
