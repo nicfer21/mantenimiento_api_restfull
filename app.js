@@ -1,6 +1,8 @@
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
+import { dirname, extname, join } from "path";
+import { fileURLToPath } from "url";
 
 import db from "./database/mantenimiento.db.js";
 import { PORT } from "./src/config.js";
@@ -33,6 +35,7 @@ import UsedInventoryRoutes from "./routes/usedinventory.route.js";
 
 const app = express();
 const port = PORT;
+const CURRENT_DIR = dirname(fileURLToPath(import.meta.url));
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
@@ -69,6 +72,9 @@ app.use("/maintenancereport/", MaintenanceReportRoutes);
 app.use("/purchase/", PurchaseRoutes);
 app.use("/requirements/", RequirementsRoutes);
 app.use("/usedinventory/", UsedInventoryRoutes);
+
+// para acceder a las imagenes
+app.use("/public/", express.static(join(CURRENT_DIR, "./uploads")));
 
 //Ruta de error 404
 app.use((req, res) => {

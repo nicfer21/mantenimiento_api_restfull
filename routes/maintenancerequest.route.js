@@ -1,12 +1,16 @@
 import express from "express";
 import {
-  getAllSessionClient,
-  getOneSessionClient,
-} from "../controller/sessionclient.controller.js";
+  createMaintenanceRequest,
+  getAllMaintenanceRequest,
+  getOneMaintenanceRequest,
+} from "../controller/maintenancerequest.controller.js";
+import { multerUpload } from "../src/multer.js";
 
 const router = express.Router();
 
-router.get("/", getAllSessionClient);
-router.get("/:id", getOneSessionClient);
+router.get("/", getAllMaintenanceRequest);
+router.get("/:id", getOneMaintenanceRequest);
+
+router.post("/", multerUpload.single("file"), createMaintenanceRequest);
 
 export default router;

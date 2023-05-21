@@ -27,3 +27,25 @@ export const getOneMaintenanceReport = async (req, res) => {
     });
   }
 };
+
+export const createMaintenanceReport = async (req, res) => {
+  try {
+    const data = {
+      image: req.file.filename,
+      startReport: req.body.startReport,
+      finishReport: req.body.finishReport,
+      timeCount: req.body.timeCount,
+      observation: req.body.observation,
+      idMaintenanceOrder: req.body.idMaintenanceOrder,
+    };
+
+    await MaintenanceReportModel.create(data);
+    res.json({
+      messege: 1,
+    });
+  } catch (error) {
+    res.json({
+      error: error,
+    });
+  }
+};
