@@ -3,8 +3,9 @@ import morgan from "morgan";
 import cors from "cors";
 import { dirname, extname, join } from "path";
 import { fileURLToPath } from "url";
-
+import jwt from "jsonwebtoken";
 import db from "./database/mantenimiento.db.js";
+
 import { PORT } from "./src/config.js";
 
 import MachineRoutes from "./routes/machine.route.js";
@@ -32,6 +33,7 @@ import MaintenanceReportRoutes from "./routes/maintenancereport.route.js";
 import PurchaseRoutes from "./routes/purchase.route.js";
 import RequirementsRoutes from "./routes/requirements.route.js";
 import UsedInventoryRoutes from "./routes/usedinventory.route.js";
+import { send } from "process";
 
 const app = express();
 const port = PORT;
@@ -43,8 +45,39 @@ app.use(express.json());
 //Ruta de inicio
 app.get("/", (req, res) => {
   res.json({
-    message: `Coneccion exitosa al API-Restfull logistica`,
+    message: `Coneccion exitosa al API-Restfull mantenimiento`,
   });
+});
+
+//Login
+app.post("/login", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const rs = await db.query(
+      `SELECT * from view_searchworkerclient as v where v.dni = "${username}" and v.pass = "${password}" ;`,
+    );
+    const { id, dni, largename, name, image, pass, levelWork } = rs[0][0];
+    const token = getToken(id, dni, largename, name, image, pass, levelWork);
+    res.json({ token });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//Middleware de autenticacion
+app.use((req, res, next) => {
+  const authHeader = req.headers.token;
+  if (authHeader) {
+    const token = authHeader.split(" ")[0];
+    jwt.verify(token, "mantenimiento", (err, decoded) => {
+      if (err) {
+        return res.status(403).json({ message: "Token inválido", type: 1 });
+      }
+      next();
+    });
+  } else {
+    res.status(401).json({ message: "Se requiere iniciar sesion", type: 2 });
+  }
 });
 
 app.use("/machine/", MachineRoutes);
@@ -96,4 +129,12 @@ const comprobacion = async () => {
   } catch (error) {
     return "Error";
   }
+};
+
+// genera el token
+const getToken = (id, dni, largename, name, image, pass, levelWork) => {
+  const payload = { id, dni, largename, name, image, pass, levelWork };
+  const secret = "mantenimiento";
+  const options = { expiresIn: "24h" }; // '30m' '1h' '24h'
+  return jwt.sign(payload, secret, options);
 };
