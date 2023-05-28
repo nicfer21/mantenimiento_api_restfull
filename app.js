@@ -33,7 +33,6 @@ import MaintenanceReportRoutes from "./routes/maintenancereport.route.js";
 import PurchaseRoutes from "./routes/purchase.route.js";
 import RequirementsRoutes from "./routes/requirements.route.js";
 import UsedInventoryRoutes from "./routes/usedinventory.route.js";
-import { send } from "process";
 
 const app = express();
 const port = PORT;
@@ -80,6 +79,12 @@ app.use((req, res, next) => {
   }
 });
 
+app.use("/prueba", (req, res) => {
+  res.json({
+    message: "OK",
+    type: 0,
+  });
+});
 app.use("/machine/", MachineRoutes);
 app.use("/part/", PartRoutes);
 app.use("/subpart/", SubPartRoutes);

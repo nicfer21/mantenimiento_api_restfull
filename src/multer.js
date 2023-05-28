@@ -3,7 +3,7 @@ import { dirname, extname, join } from "path";
 import { fileURLToPath } from "url";
 
 const CURRENT_DIR = dirname(fileURLToPath(import.meta.url));
-const MIMETYPES = ["image/png", "image/jpeg", "image/png", "image/jpg"];
+const MIMETYPES = ["image/png", "image/jpeg", "image/jpg"];
 
 export const multerUpload = multer({
   storage: multer.diskStorage({
