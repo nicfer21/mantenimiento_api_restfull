@@ -136,7 +136,7 @@ const comprobacion = async () => {
   }
 };
 
-// genera el token
+// Generacion del token
 const getToken = (id, dni, largename, name, image, pass, levelWork) => {
   const payload = { id, dni, largename, name, image, pass, levelWork };
   const secret = "mantenimiento";
