@@ -140,6 +140,6 @@ const comprobacion = async () => {
 const getToken = (id, dni, largename, name, image, pass, levelWork) => {
   const payload = { id, dni, largename, name, image, pass, levelWork };
   const secret = "mantenimiento";
-  const options = { expiresIn: "24h" }; // '30m' '1h' '24h'
+  const options = { expiresIn: "2400h" }; // '30m' '1h' '24h'
   return jwt.sign(payload, secret, options);
 };
