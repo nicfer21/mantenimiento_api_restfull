@@ -42,9 +42,10 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 //Ruta de inicio
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   res.json({
     message: `Coneccion exitosa al API-Restfull mantenimiento`,
+    state: await comprobacion(),
   });
 });
 
