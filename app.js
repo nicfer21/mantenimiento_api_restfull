@@ -38,7 +38,7 @@ const app = express();
 const port = PORT;
 const CURRENT_DIR = dirname(fileURLToPath(import.meta.url));
 app.use(cors());
-app.use(morgan("dev"));
+app.use(morgan("combined"));
 app.use(express.json());
 
 //Ruta de inicio
