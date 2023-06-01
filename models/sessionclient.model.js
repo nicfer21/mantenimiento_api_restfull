@@ -8,11 +8,11 @@ const SessionClientModel = db.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement:true,
+      autoIncrement: true,
     },
     datesession: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     idClient: {
       type: DataTypes.INTEGER,
@@ -22,7 +22,7 @@ const SessionClientModel = db.define(
   {
     tableName: "sessionclient", // nombre de la tabla en singular
     timestamps: false, // desactivar los timestamps si no los necesitas
-  },
+  }
 );
 
 export default SessionClientModel;

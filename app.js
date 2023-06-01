@@ -4,6 +4,7 @@ import cors from "cors";
 import { dirname, extname, join } from "path";
 import { fileURLToPath } from "url";
 import jwt from "jsonwebtoken";
+
 import db from "./database/mantenimiento.db.js";
 
 import { PORT } from "./src/config.js";
@@ -34,6 +35,8 @@ import PurchaseRoutes from "./routes/purchase.route.js";
 import RequirementsRoutes from "./routes/requirements.route.js";
 import UsedInventoryRoutes from "./routes/usedinventory.route.js";
 
+import LoggingRoutes from "./routes/login.route.js";
+
 const app = express();
 const port = PORT;
 const CURRENT_DIR = dirname(fileURLToPath(import.meta.url));
@@ -50,19 +53,7 @@ app.get("/", async (req, res) => {
 });
 
 //Login
-app.post("/login", async (req, res) => {
-  try {
-    const { username, password } = req.body;
-    const rs = await db.query(
-      `SELECT * from view_searchworkerclient as v where v.dni = "${username}" and v.pass = "${password}" ;`
-    );
-    const { id, dni, largename, name, image, pass, levelWork } = rs[0][0];
-    const token = getToken(id, dni, largename, name, image, pass, levelWork);
-    res.json({ messege: "OK", token });
-  } catch (error) {
-    res.json({ messege: "NO", token: "1" });
-  }
-});
+app.use("/login/", LoggingRoutes);
 
 //Middleware de autenticacion
 app.use((req, res, next) => {
@@ -135,12 +126,4 @@ const comprobacion = async () => {
   } catch (error) {
     return "Error";
   }
-};
-
-// Generacion del token
-const getToken = (id, dni, largename, name, image, pass, levelWork) => {
-  const payload = { id, dni, largename, name, image, pass, levelWork };
-  const secret = "mantenimiento";
-  const options = { expiresIn: "2400h" }; // '30m' '1h' '24h'
-  return jwt.sign(payload, secret, options);
 };
