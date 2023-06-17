@@ -8,7 +8,7 @@ const MaintenanceRequestModel = db.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement:true,
+      autoIncrement: true,
     },
     title: {
       type: DataTypes.STRING,
@@ -24,7 +24,7 @@ const MaintenanceRequestModel = db.define(
     },
     requestDate: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     requestState: {
       type: DataTypes.INTEGER,
@@ -46,7 +46,7 @@ const MaintenanceRequestModel = db.define(
   {
     tableName: "maintenancerequest", // nombre de la tabla en singular
     timestamps: false, // desactivar los timestamps si no los necesitas
-  },
+  }
 );
 
 export default MaintenanceRequestModel;

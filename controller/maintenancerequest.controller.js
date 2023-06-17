@@ -3,7 +3,10 @@ import MaintenanceRequestModel from "../models/maintenancerequest.model.js";
 export const getAllMaintenanceRequest = async (req, res) => {
   try {
     const rs = await MaintenanceRequestModel.findAll({
-      order: [["idMaintenanceRequest", "ASC"]],
+      order: [
+        ["requestState", "ASC"],
+        ["requestDate", "DESC"],
+      ],
     });
     res.json(rs);
   } catch (error) {
@@ -34,7 +37,6 @@ export const createMaintenanceRequest = async (req, res) => {
       title: req.body.title,
       description: req.body.description,
       image: req.file.filename,
-      requestDate: req.body.requestDate,
       requestState: req.body.requestState,
       idWorker: req.body.idWorker,
       idPlace: req.body.idPlace,
