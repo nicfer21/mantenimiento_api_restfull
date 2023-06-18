@@ -1,4 +1,5 @@
 import MaintenanceRequestModel from "../models/maintenancerequest.model.js";
+import db from "../database/mantenimiento.db.js";
 
 export const getAllMaintenanceRequest = async (req, res) => {
   try {
@@ -18,12 +19,27 @@ export const getAllMaintenanceRequest = async (req, res) => {
 
 export const getOneMaintenanceRequest = async (req, res) => {
   try {
-    const rs = await MaintenanceRequestModel.findOne({
-      where: {
-        idMaintenanceRequest: req.params.id,
-      },
+    const rs = await db.query(
+      `select * from view_maintenancerequest_data where idMaintenanceRequest = ${req.params.id}  ;`
+    );
+    res.json(rs[0][0]);
+  } catch (error) {
+    res.json({
+      error: error,
     });
-    res.json(rs);
+  }
+};
+
+export const patchStateMaintenanceRequest = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { requestState } = req.body;
+    const rs = await MaintenanceRequestModel.findByPk(id);
+    rs.requestState = requestState;
+    await rs.save();
+    res.json({
+      messege: 1,
+    });
   } catch (error) {
     res.json({
       error: error,
