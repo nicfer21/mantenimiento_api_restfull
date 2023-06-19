@@ -53,7 +53,7 @@ export const createMaintenanceRequest = async (req, res) => {
       title: req.body.title,
       description: req.body.description,
       image: req.file.filename,
-      requestState: req.body.requestState,
+      requestState: 0,
       idWorker: req.body.idWorker,
       idPlace: req.body.idPlace,
       idMachine: req.body.idMachine,
