@@ -8,11 +8,11 @@ const MaintenanceOrderModel = db.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement:true,
+      autoIncrement: true,
     },
     description: {
       type: DataTypes.TEXT("long"),
-      allowNull: false,
+      allowNull: true,
     },
     stepValue: {
       type: DataTypes.TINYINT,
@@ -42,7 +42,7 @@ const MaintenanceOrderModel = db.define(
   {
     tableName: "maintenanceorder", // nombre de la tabla en singular
     timestamps: false, // desactivar los timestamps si no los necesitas
-  },
+  }
 );
 
 export default MaintenanceOrderModel;
