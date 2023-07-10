@@ -8,7 +8,6 @@ const MaintenanceReportModel = db.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement:true,
     },
     startReport: {
       type: DataTypes.DATE,
@@ -24,7 +23,7 @@ const MaintenanceReportModel = db.define(
     },
     observation: {
       type: DataTypes.TEXT("long"),
-      allowNull: false,
+      allowNull: true,
     },
     image: {
       type: DataTypes.STRING,
@@ -38,7 +37,7 @@ const MaintenanceReportModel = db.define(
   {
     tableName: "maintenancereport", // nombre de la tabla en singular
     timestamps: false, // desactivar los timestamps si no los necesitas
-  },
+  }
 );
 
 export default MaintenanceReportModel;

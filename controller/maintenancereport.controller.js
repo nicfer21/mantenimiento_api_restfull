@@ -1,3 +1,4 @@
+import MaintenanceOrderModel from "../models/maintenanceorder.model.js";
 import MaintenanceReportModel from "../models/maintenancereport.model.js";
 
 export const getAllMaintenanceReport = async (req, res) => {
@@ -37,11 +38,19 @@ export const createMaintenanceReport = async (req, res) => {
       timeCount: req.body.timeCount,
       observation: req.body.observation,
       idMaintenanceOrder: req.body.idMaintenanceOrder,
+      idMaintenanceReport: req.body.idMaintenanceReport,
     };
 
     await MaintenanceReportModel.create(data);
+
+    const rs = await MaintenanceOrderModel.findByPk(
+      req.body.idMaintenanceOrder
+    );
+    rs.stepValue = 2;
+    await rs.save();
+
     res.json({
-      messege: 1,
+      messege: "creado reporte",
     });
   } catch (error) {
     res.json({

@@ -8,14 +8,15 @@ export const initLogging = async (req, res) => {
     const rs = await db.query(
       `SELECT * from view_searchworkerclient as v where v.dni = "${username}" and v.pass = "${password}" ;`
     );
-    const { id, dni, largename, name, image, pass, levelWork } = rs[0][0];
+    const { id, dni, largename, name, image, pass, levelWork, idClient } =
+      rs[0][0];
     const token = getToken(id, dni, largename, name, image, pass, levelWork);
     await SessionClientModel.create({
-      idClient: id,
+      idClient: idClient,
     });
     res.json({ messege: "OK", token });
   } catch (error) {
-    res.json({ messege: "NO", token: "1" });
+    res.json({ messege: "NO", token: error });
   }
 };
 

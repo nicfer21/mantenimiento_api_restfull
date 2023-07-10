@@ -69,3 +69,20 @@ export const createMaintenanceRequest = async (req, res) => {
     });
   }
 };
+
+export const getMaintenanceRequestByMonth = async (req, res) => {
+  try {
+    const rs = await db.query(
+      `select *
+      from mantenimiento.maintenancerequest
+      where 
+      year(date(convert_tz(requestDate,'+00:00', '-05:00'))) = "${req.params.year}" AND 
+      month(date(convert_tz(requestDate,'+00:00', '-05:00'))) = "${req.params.month}" ;`
+    );
+    res.json(rs[0]);
+  } catch (error) {
+    res.json({
+      error: error,
+    });
+  }
+};
