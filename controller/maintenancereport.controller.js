@@ -21,7 +21,7 @@ export const getOneMaintenanceReport = async (req, res) => {
       `select * from view_maintenancereport_data where idMaintenanceOrder = ${req.params.id} ;`
     );
 
-    res.json(rs[0]);
+    res.json(rs[0][0]);
   } catch (error) {
     res.json({
       error: error,
