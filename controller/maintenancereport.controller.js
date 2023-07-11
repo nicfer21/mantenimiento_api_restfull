@@ -1,10 +1,11 @@
 import MaintenanceOrderModel from "../models/maintenanceorder.model.js";
 import MaintenanceReportModel from "../models/maintenancereport.model.js";
+import db from "../database/mantenimiento.db.js";
 
 export const getAllMaintenanceReport = async (req, res) => {
   try {
     const rs = await MaintenanceReportModel.findAll({
-      order: [["idMaintenanceReport", "ASC"]],
+      order: [["startReport", "DESC"]],
     });
     res.json(rs);
   } catch (error) {
@@ -16,12 +17,11 @@ export const getAllMaintenanceReport = async (req, res) => {
 
 export const getOneMaintenanceReport = async (req, res) => {
   try {
-    const rs = await MaintenanceReportModel.findOne({
-      where: {
-        idMaintenanceReport: req.params.id,
-      },
-    });
-    res.json(rs);
+    const rs = await db.query(
+      `select * from view_maintenancereport_data where idMaintenanceOrder = ${req.params.id} ;`
+    );
+
+    res.json(rs[0]);
   } catch (error) {
     res.json({
       error: error,
@@ -50,7 +50,7 @@ export const createMaintenanceReport = async (req, res) => {
     await rs.save();
 
     res.json({
-      messege: "creado reporte",
+      messege: "1",
     });
   } catch (error) {
     res.json({

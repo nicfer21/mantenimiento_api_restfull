@@ -16,12 +16,12 @@ export const getAllMaintenanceOrder = async (req, res) => {
 
 export const getOneMaintenanceOrder = async (req, res) => {
   try {
-    const rs = await MaintenanceOrderModel.findOne({
-      where: {
-        idMaintenanceOrder: req.params.id,
-      },
-    });
-    res.json(rs);
+    const rs = await db.query(
+      `select * from maintenanceorder m 
+      inner join view_maintenanceprocedure_data vmd on m.idMaintenanceProcedure = vmd.idMaintenanceProcedure
+      where m.idMaintenanceOrder  = "${req.params.id}";`
+    );
+    res.json(rs[0][0]);
   } catch (error) {
     res.json({
       error: error,
